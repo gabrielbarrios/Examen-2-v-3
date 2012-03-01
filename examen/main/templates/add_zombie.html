@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>CRUD</title>
+<style type="text/css">
+		body {
+			background-color:#551cf4;		
+		}
+	</style>
+</head>
+<body>
+	<center>
+		<h2>Welcome</h2>
+		<form method="POST" align="left" >
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit"/>
+		</form>
+	</center>
+</body>
+
+</html>

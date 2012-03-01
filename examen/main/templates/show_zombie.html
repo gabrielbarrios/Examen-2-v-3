@@ -1,0 +1,67 @@
+<html>
+<head>
+	<title>{{ zombie.name }} - Zombies vs Tweests</title>
+	<script type="text/javascript">	
+		startList = function() {
+		if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("nav");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+		node = navRoot.childNodes[i];
+		if (node.nodeName=="LI") {
+		node.onmouseover=function() {
+		this.className+=" over";
+		  }
+		  node.onmouseout=function() {
+		  this.className=this.className.replace(" over", "");
+		   }
+		   }
+		  }
+		 }
+		}
+		window.onload=startList;
+	</script>
+	<style type="text/css">
+		body {
+			background-color:#34bc9d;		
+		}		
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		  }
+	
+		li ul {
+			display: none;
+			position: absolute; 
+			top: 1em;
+			left: 0;
+		}
+		li > ul {
+			top: auto;
+			left: auto;
+		}
+		li:hover ul, li.over ul{ display: block; }
+	</style>
+</head>
+<body>
+	<a href="{% url home %}">Home</a>
+	<h1>{{ zombie.name }} {{ zombie.tweets.count }}</h1>
+	<div>
+		<a href="{% url add_tweet %}">Add Tweet</a>
+		<a href="{% url edit_zombie zombie.pk %}">Edit Zombie</a>
+		<a href="{% url delete_zombie zombie.pk %}">Delete Zombie</a>
+	</div>	
+	<p>Graveyard : {{ zombie.graveyard }}</p>
+		<ul id="nav">
+			<li><h3>Acerca el puntero para ver los tweet:</h3>
+				<ul>
+					<p>{% for tweet in zombie.tweets.all %}
+						<div> <li>ID : {{ tweet.pk }} - status: {{ tweet.status }} <br/> Created_at  :  {{tweet.created_at}} </li><br/></div>
+						{% endfor %}
+					</p>
+				</ul>
+			</li>
+		</ul>
+</body>
+
+</html>

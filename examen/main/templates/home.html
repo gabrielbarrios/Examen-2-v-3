@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Test 2, web programming </title>
+	<style type="text/css">
+		body {
+			background-color:#ff9999;		
+		}
+	</style>
+</head>
+<body>
+	<div>
+		Zombiesssss!
+	</div>
+	<div><a href="{% url add_zombie %}">Add Zombie</a></div>
+	<hr/>
+	{% for zombie in zombies %}
+	<div>
+		<h3>ID : {{ zombie.pk }} : {{ zombie.name }} - ({{ zombie.tweets.count }}) tweets</h3>
+		<a href="{% url show_zombie zombie.pk %}">See more</a>
+		<div><h4>Graveyard - {{ zombie.graveyard }}</h4></div>
+		<div class='tweets'>
+			{% for tweet in zombie.tweets.all %}
+			<div>Tweet: {{ tweet.status }}</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endfor %}
+	
+	{% for tweet in Tweets %}
+		<div>
+			<h3>hola - {{ tweet.status }}</h3>
+		</div>
+	{% endfor %}
+</body>
+
+</html>
